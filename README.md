@@ -24,7 +24,11 @@ feito nos exemplos. Isso melhora a organização do projeto.
 - Na página inicial, clique em Novo Projeto e escolha a opção Carregar Projeto, depois selecione o
   arquivo .zip gerado anteriormente.
 - Clique em Menu, no canto esquerdo superior do projeto gerado:
+
 ![Menu](imgs/menu.jpg)
+
 - Altere a opção Compilador para XeLaTeX:
+
 ![Compilador](imgs/compilador.jpg)
+
 - Também altere Documento Principal para document.tex
