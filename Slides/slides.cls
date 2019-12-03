@@ -42,7 +42,7 @@
 \RequirePackage{graphicx} % For images
 \RequirePackage{rotate} % To rotate images
 \RequirePackage[section]{placeins} % Prevents figures from floating to wrong places
-\RequirePackage{epsf}
+\RequirePackage{subfig}
 \RequirePackage{caption}
 
 % Math related

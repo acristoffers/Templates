@@ -1,0 +1,30 @@
+% !TeX root = document.tex
+% !TeX encoding = UTF-8 Unicode
+
+\section{Section 1}
+\subsection{Subsection 1}
+
+\begin{slide}{Figure}
+    \vspace*{\fill}
+    \begin{figure}[ht!]
+        \centering
+        \captionsetup{justification=centering}
+        \includegraphics[height=0.3\textheight]{imgs/cefet}
+        \caption{One Image}
+    \end{figure}
+    \vspace*{\fill}
+\end{slide}
+
+\subsection{Subsection 2}
+
+\begin{slide}{Side by Side Figures}
+    \vspace*{\fill}
+    \begin{figure}[ht!]
+        \centering
+        \captionsetup{justification=centering}
+        \subfloat[One]{\includegraphics[height=0.3\textheight]{imgs/cefet}}\qquad
+        \subfloat[Two]{\includegraphics[height=0.3\textheight]{imgs/cefet}}
+        \caption{Two Images}
+    \end{figure}
+    \vspace*{\fill}
+\end{slide}
