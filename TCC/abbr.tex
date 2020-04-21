@@ -7,7 +7,7 @@
 \ExplSyntaxOn
 \cs_set_protected:Npn \acro_activate_hyperref_support:
   {
-    \bool_if:nT { \l__acro_hyperref_loaded_bool && \l__acro_hyperref_use_bool }
+    \bool_if:nT { \l__acro_hyperref_loaded_bool }
       {
         \sys_if_engine_xetex:TF
           {

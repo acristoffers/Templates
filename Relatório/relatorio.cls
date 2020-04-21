@@ -4,7 +4,7 @@
 
 % Declaration for this class
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{relatorio}[2019/12/03 Modelo de Relatório do CEFET em XeLaTeX]
+\ProvidesClass{relatorio}[2020/04/21 Modelo de Relatório do CEFET em XeLaTeX]
 
 % This command has to be defined for every class
 \newcommand{\headlinecolor}{\normalcolor}
@@ -35,26 +35,24 @@
 \renewcommand{\baselinestretch}{1.5} % Line height of 1.5
 
 \if@langfr
-    \RequirePackage[decimalsymbol=comma,
-                    input-complex-roots=j,
+    \RequirePackage[input-complex-roots=j,
                     output-complex-root=j,
-                    complex-root-position=after-number,
-                    loctolang={FR:french}]{siunitx} % SI units
+                    complex-root-position=after-number]{siunitx} % SI units
     \selectlanguage{french}
+    \sisetup{locale=FR}
 \elsif@langen
     \RequirePackage[decimalsymbol=dot,
                     input-complex-roots=j,
                     output-complex-root=j,
-                    complex-root-position=after-number,
-                    loctolang={UK:english}]{siunitx} % SI units
+                    complex-root-position=after-number]{siunitx} % SI units
     \selectlanguage{english}
+    \sisetup{locale=US}
 \else
-    \RequirePackage[decimalsymbol=comma,
-                    input-complex-roots=j,
+    \RequirePackage[input-complex-roots=j,
                     output-complex-root=j,
-                    complex-root-position=after-number,
-                    loctolang={BR:portuguese}]{siunitx} % SI units
+                    complex-root-position=after-number]{siunitx} % SI units
     \selectlanguage{brazil}
+    \sisetup{locale=DE}
 \fi
 
 \RequirePackage[useregional]{datetime2}

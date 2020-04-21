@@ -4,26 +4,49 @@
 
 % Declaration for this class
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{slides}[2019/11/27 Modelo de Apresentação de Slides em XeLaTeX]
+\ProvidesClass{slides}[2020/04/21 Modelo de Apresentação de Slides em XeLaTeX]
 
 % Base our class on Beamer
-\LoadClass[8pt,t,mathserif,compress,usenames,dvipsnames]{beamer}
+\LoadClass[8pt,t,compress,usenames,dvipsnames]{beamer}
 \RequirePackage[english,french,brazil]{babel}
 
 % Declares options accepted by this class. No \RequirePackage allowed from now
 % on. Since we cannot \RequirePackage inside \DeclareOption, we have to create a
 % variable to hold whether the package should be loaded.
-% \newif\if@langen
+
+\newif\if@langen
+\newif\if@langfr
+\newif\if@useminted
 
 \DeclareOption{abnt}{\PassOptionsToPackage{style=abnt}{biblatex}}
 \DeclareOption{ieee}{\PassOptionsToPackage{style=ieee}{biblatex}}
-\DeclareOption{pt}{\PassOptionsToPackage{loctolang={BR:portuguese}}{siunitx}\selectlanguage{brazil}}
-\DeclareOption{en}{\PassOptionsToPackage{loctolang={UK:english}}{siunitx}\selectlanguage{english}}
-\DeclareOption{fr}{\PassOptionsToPackage{loctolang={FR:french}}{siunitx}\selectlanguage{french}}
+\DeclareOption{english}{\@langentrue}
+\DeclareOption{french}{\@langfrtrue}
 
 % Processes all options and puts us back into normal mode. \RequirePackage
 % allowed again.
 \ProcessOptions\relax
+
+\if@langfr
+    \RequirePackage[input-complex-roots=j,
+                    output-complex-root=j,
+                    complex-root-position=after-number]{siunitx} % SI units
+    \selectlanguage{french}
+    \sisetup{locale=FR}
+\elsif@langen
+    \RequirePackage[decimalsymbol=dot,
+                    input-complex-roots=j,
+                    output-complex-root=j,
+                    complex-root-position=after-number]{siunitx} % SI units
+    \selectlanguage{english}
+    \sisetup{locale=US}
+\else
+    \RequirePackage[input-complex-roots=j,
+                    output-complex-root=j,
+                    complex-root-position=after-number]{siunitx} % SI units
+    \selectlanguage{brazil}
+    \sisetup{locale=DE}
+\fi
 
 % Basic
 \RequirePackage{fontspec}
@@ -33,8 +56,7 @@
 \RequirePackage{framed}
 \RequirePackage{etoolbox}
 \RequirePackage{pgffor}
-\RequirePackage[decimalsymbol=comma,
-    input-complex-roots=j,
+\RequirePackage[input-complex-roots=j,
     output-complex-root=j,
     complex-root-position=after-number]{siunitx}
 
@@ -68,12 +90,11 @@
 \RequirePackage[absolute, overlay]{textpos} % \textblock
 
 % Template Configuration
-
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \setmainfont{Times New Roman}
-\setmonofont{Consolas}
+\setmonofont{inconsolata}
 \usetheme{Dresden}
-\usefonttheme{serif}
+\usefonttheme[onlymath]{serif}
 
 \setbeamertemplate{headline}
 {
