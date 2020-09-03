@@ -39,21 +39,17 @@
     \RequirePackage[input-complex-roots=j,
                     output-complex-root=j,
                     complex-root-position=after-number]{siunitx} % SI units
-    \selectlanguage{french}
-    \sisetup{locale=FR}
-\elsif@langen
-    \RequirePackage[decimalsymbol=dot,
-                    input-complex-roots=j,
-                    output-complex-root=j,
-                    complex-root-position=after-number]{siunitx} % SI units
-    \selectlanguage{english}
-    \sisetup{locale=US}
 \else
-    \RequirePackage[input-complex-roots=j,
-                    output-complex-root=j,
-                    complex-root-position=after-number]{siunitx} % SI units
-    \selectlanguage{brazil}
-    \sisetup{locale=DE}
+    \if@langen
+        \RequirePackage[decimalsymbol=.,
+                        input-complex-roots=j,
+                        output-complex-root=j,
+                        complex-root-position=after-number]{siunitx} % SI units
+    \else
+        \RequirePackage[input-complex-roots=j,
+                        output-complex-root=j,
+                        complex-root-position=after-number]{siunitx} % SI units
+    \fi
 \fi
 
 \RequirePackage[useregional]{datetime2}
@@ -234,6 +230,18 @@
      {~}
 
 \renewcommand{\maketitle}{
+    \if@langfr
+        \selectlanguage{french}%
+        \sisetup{locale=FR}%
+    \else
+        \if@langen
+            \selectlanguage{english}%
+            \sisetup{locale=US}%
+        \else
+            \selectlanguage{brazil}%
+            \sisetup{locale=DE}%
+        \fi
+    \fi
     \pretextual{}
     \renewcommand{\printtoctitle}{\chapter*}
     \renewcommand{\printloftitle}{\chapter*}

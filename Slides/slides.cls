@@ -18,34 +18,31 @@
 \newif\if@langfr
 \newif\if@useminted
 
-\DeclareOption{abnt}{\PassOptionsToPackage{style=abnt}{biblatex}}
-\DeclareOption{ieee}{\PassOptionsToPackage{style=ieee}{biblatex}}
-\DeclareOption{english}{\@langentrue}
-\DeclareOption{french}{\@langfrtrue}
+	\DeclareOption{abnt}{\PassOptionsToPackage{style=abnt}{biblatex}}
+	\DeclareOption{ieee}{\PassOptionsToPackage{style=ieee}{biblatex}}
+	\DeclareOption{english}{\@langentrue}
+	\DeclareOption{french}{\@langfrtrue}
 
-% Processes all options and puts us back into normal mode. \RequirePackage
-% allowed again.
-\ProcessOptions\relax
+	% Processes all options and puts us back into normal mode. \RequirePackage
+	% allowed again.
+	\ProcessOptions\relax
 
-\if@langfr
-    \RequirePackage[input-complex-roots=j,
-                    output-complex-root=j,
-                    complex-root-position=after-number]{siunitx} % SI units
-    \selectlanguage{french}
-    \sisetup{locale=FR}
-\elsif@langen
-    \RequirePackage[decimalsymbol=dot,
-                    input-complex-roots=j,
-                    output-complex-root=j,
-                    complex-root-position=after-number]{siunitx} % SI units
-    \selectlanguage{english}
-    \sisetup{locale=US}
-\else
-    \RequirePackage[input-complex-roots=j,
-                    output-complex-root=j,
-                    complex-root-position=after-number]{siunitx} % SI units
-    \selectlanguage{brazil}
-    \sisetup{locale=DE}
+	\if@langfr
+		\RequirePackage[input-complex-roots=j,
+			output-complex-root=j,
+			complex-root-position=after-number]{siunitx} % SI units
+	\else
+		\if@langen
+			\RequirePackage[decimalsymbol=.,
+				input-complex-roots=j,
+				output-complex-root=j,
+				complex-root-position=after-number]{siunitx} % SI units
+		\else
+			\RequirePackage[input-complex-roots=j,
+				output-complex-root=j,
+				complex-root-position=after-number]{siunitx} % SI units
+		\fi
+	\fi
 \fi
 
 % Basic
@@ -57,8 +54,8 @@
 \RequirePackage{etoolbox}
 \RequirePackage{pgffor}
 \RequirePackage[input-complex-roots=j,
-    output-complex-root=j,
-    complex-root-position=after-number]{siunitx}
+	output-complex-root=j,
+	complex-root-position=after-number]{siunitx}
 
 % Image manipulation
 \RequirePackage{graphicx} % For images
@@ -98,28 +95,28 @@
 
 \setbeamertemplate{headline}
 {
-  \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
-  \end{beamercolorbox}
-  \begin{beamercolorbox}{section in head/foot}
-    \vskip2pt%
-    \insertsectionnavigationhorizontal{\textwidth}{}{}%
-    \insertsubsectionnavigationhorizontal{\textwidth}{}{}%
-    \vskip2pt
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[colsep=1.5pt]{middle separation line head}
-  \end{beamercolorbox}
-  \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
-    leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
-    \usebeamerfont{subsection in head/foot}\insertsubsectionhead{}
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
-  \end{beamercolorbox}
+	\begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+	\end{beamercolorbox}
+	\begin{beamercolorbox}{section in head/foot}
+		\vskip2pt%
+		\insertsectionnavigationhorizontal{\textwidth}{}{}%
+		\insertsubsectionnavigationhorizontal{\textwidth}{}{}%
+		\vskip2pt
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[colsep=1.5pt]{middle separation line head}
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+			leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
+		\usebeamerfont{subsection in head/foot}\insertsubsectionhead{}
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+	\end{beamercolorbox}
 }
 
 \setbeamertemplate{footline} {
-  \begin{center}
-    \insertframenumber/\inserttotalframenumber{}
-  \end{center}
+	\begin{center}
+		\insertframenumber/\inserttotalframenumber{}
+	\end{center}
 }
 
 \setbeamercovered{dynamic}
@@ -128,9 +125,9 @@
 
 \newcounter{authors}
 \newcommand\addauthor[2]{%
-  \stepcounter{authors}%
-  \csdef{author\theauthors}{#1}%
-  \csdef{authoremail\theauthors}{#2}%
+	\stepcounter{authors}%
+	\csdef{author\theauthors}{#1}%
+	\csdef{authoremail\theauthors}{#2}%
 }
 \newcommand\getauthor[1]{\csuse{author#1}}
 \newcommand\getauthoremail[1]{\csuse{authoremail#1}}
@@ -141,8 +138,8 @@
 
 \newcounter{coorientador}
 \newcommand\addcoorientador[1]{%
-  \stepcounter{coorientador}%
-  \csdef{coorientador\thecoorientador}{#1}%
+	\stepcounter{coorientador}%
+	\csdef{coorientador\thecoorientador}{#1}%
 }
 \newcommand\getcoorientador[1]{\csuse{coorientador#1}}
 \newcommand\getcoorientadores{\foreach \i in {1,...,\thecoorientador}{\getcoorientador{\i}\ifnum\i=\thecoorientador\@\else,\ \fi}}
@@ -154,68 +151,80 @@
 \newcommand\setdepartamento[1]{\csdef{departamento}{#1}}
 
 \newcommand\preamble{%
-    \hypersetup{
-        unicode=true,
-        pdftitle={\@title},
-        pdfauthor={\getauthor{1}},
-        pdfstartview={FitH}
-    }%
+	\hypersetup{
+		unicode=true,
+		pdftitle={\@title},
+		pdfauthor={\getauthor{1}},
+		pdfstartview={FitH}
+	}%
 }
 
 \newcommand{\addlogo}{
-    \begin{textblock}{2}(0.5,14.5)
-        \includegraphics[width=1cm]{imgs/cefet}
-    \end{textblock}
-    \begin{textblock*}{\textwidth}(50pt,255pt)
-        \begin{flushright}
-            \footnotesize{\getauthornames{}}
-        \end{flushright}
-    \end{textblock*}
+	\begin{textblock}{2}(0.5,14.5)
+		\includegraphics[width=1cm]{imgs/cefet}
+	\end{textblock}
+	\begin{textblock*}{\textwidth}(50pt,255pt)
+		\begin{flushright}
+			\footnotesize{\getauthornames{}}
+		\end{flushright}
+	\end{textblock*}
 }
 
 \newenvironment{slide}[1]
 {
-    \begin{frame}{#1}
-    \addlogo{}
-}
-{
-    \end{frame}
+	\begin{frame}{#1}
+		\addlogo{}
+		}
+		{
+	\end{frame}
 }
 
 \renewcommand{\maketitle}{
-    \setbeamercovered{invisible}
-    \begin{slide}{}
-        \vbox{}
-        \vfill
-        \begingroup
-            \centering
-            \begin{beamercolorbox}[sep=8pt,center]{title}
-                \usebeamerfont{title}\inserttitle\par%
-                \ifx\insertsubtitle\@empty%
-                \else%
-                \vskip0.25em%
-                {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-                \fi%     
-            \end{beamercolorbox}%
-            \begin{beamercolorbox}[sep=8pt,center]{author}
-                \usebeamerfont{author}\getauthors%\insertauthor{}
-            \end{beamercolorbox}
+	\if@langfr
+		\selectlanguage{french}%
+		\sisetup{locale=FR}%
+	\else
+		\if@langen
+			\selectlanguage{english}%
+			\sisetup{locale=US}%
+		\else
+			\selectlanguage{brazil}%
+			\sisetup{locale=DE}%
+		\fi
+	\fi
+	\setbeamercovered{invisible}
+	\begin{slide}{}
+		\vbox{}
+		\vfill
+		\begingroup
+		\centering
+		\begin{beamercolorbox}[sep=8pt,center]{title}
+			\usebeamerfont{title}\inserttitle\par%
+			\ifx\insertsubtitle\@empty%
+			\else%
+				\vskip0.25em%
+				{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+			\fi%
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[sep=8pt,center]{author}
+			\usebeamerfont{author}\getauthors%\insertauthor{}
+		\end{beamercolorbox}
 
-            \vfill
+		\vfill
 
-            \departamento\\
-~\\
-            \tiny{
-                Orientador: \getorientador{}\\
-                Coorientador\ifnum\thecoorientador=1\@\else es\fi: \getcoorientadores{}
-            }
+		\departamento\\
+		~\\
+		\tiny{
+			Orientador: \getorientador{}\\
+			Coorientador\ifnum\thecoorientador=1\@\else es\fi: \getcoorientadores{}
+		}
 
-            \vfill
+		\vfill
 
-            \begin{beamercolorbox}[sep=8pt,center]{date}
-                \usebeamerfont{date}\local{}\\\ano{}
-            \end{beamercolorbox}\vskip0.5em
-        \endgroup
-        \vfill
-    \end{slide}
+		\begin{beamercolorbox}[sep=8pt,center]{date}
+			\usebeamerfont{date}\local{}\\\ano{}
+		\end{beamercolorbox}\vskip0.5em
+		\endgroup
+		\vfill
+	\end{slide}
 }

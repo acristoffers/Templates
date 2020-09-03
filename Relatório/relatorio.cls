@@ -35,24 +35,20 @@
 \renewcommand{\baselinestretch}{1.5} % Line height of 1.5
 
 \if@langfr
-    \RequirePackage[input-complex-roots=j,
-                    output-complex-root=j,
-                    complex-root-position=after-number]{siunitx} % SI units
-    \selectlanguage{french}
-    \sisetup{locale=FR}
-\elsif@langen
-    \RequirePackage[decimalsymbol=dot,
-                    input-complex-roots=j,
-                    output-complex-root=j,
-                    complex-root-position=after-number]{siunitx} % SI units
-    \selectlanguage{english}
-    \sisetup{locale=US}
+	\RequirePackage[input-complex-roots=j,
+		output-complex-root=j,
+		complex-root-position=after-number]{siunitx} % SI units
 \else
-    \RequirePackage[input-complex-roots=j,
-                    output-complex-root=j,
-                    complex-root-position=after-number]{siunitx} % SI units
-    \selectlanguage{brazil}
-    \sisetup{locale=DE}
+	\if@langen
+		\RequirePackage[decimalsymbol=.,
+			input-complex-roots=j,
+			output-complex-root=j,
+			complex-root-position=after-number]{siunitx} % SI units
+	\else
+		\RequirePackage[input-complex-roots=j,
+			output-complex-root=j,
+			complex-root-position=after-number]{siunitx} % SI units
+	\fi
 \fi
 
 \RequirePackage[useregional]{datetime2}
@@ -101,27 +97,27 @@
 \RequirePackage{tocloft}
 
 \if@useminted
-    \RequirePackage[section]{minted} % Code highlighting with Pygments
-    
-    
-    % Removes red boxes when lexer can not understand something (like @ in Python 3)
-    \AtBeginEnvironment{minted}{\renewcommand{\fcolorbox}[4][]{#4}}
+	\RequirePackage[section]{minted} % Code highlighting with Pygments
 
-    % pythoncode environment for hightlight
-    \newminted{python3}
-    {autogobble,linenos,python3,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
-    \newmintedfile[python]{python3}
-    {autogobble,linenos,python3,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
 
-    % ccode environment for highlight
-    \newminted{c}
-    {autogobble,linenos,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
+	% Removes red boxes when lexer can not understand something (like @ in Python 3)
+	\AtBeginEnvironment{minted}{\renewcommand{\fcolorbox}[4][]{#4}}
 
-    \newfloat{code}{htp}{loc}
-    \floatname{code}{Código}
-    \newlistof{listofcodes}{loc}{Lista de Códigos}
-    \newlistentry[chapter]{code}{loc}{0}
-    \cftsetindents{code}{0em}{2.3em}
+	% pythoncode environment for hightlight
+	\newminted{python3}
+	{autogobble,linenos,python3,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
+	\newmintedfile[python]{python3}
+	{autogobble,linenos,python3,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
+
+	% ccode environment for highlight
+	\newminted{c}
+	{autogobble,linenos,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
+
+	\newfloat{code}{htp}{loc}
+	\floatname{code}{Código}
+	\newlistof{listofcodes}{loc}{Lista de Códigos}
+	\newlistentry[chapter]{code}{loc}{0}
+	\cftsetindents{code}{0em}{2.3em}
 \fi
 
 % End of \RequirePackage's
@@ -135,8 +131,8 @@
 
 \newcounter{authors}
 \newcommand\addauthor[1]{%
-  \stepcounter{authors}%
-  \csdef{author\theauthors}{#1}%
+	\stepcounter{authors}%
+	\csdef{author\theauthors}{#1}%
 }
 \newcommand\getauthor[1]{\csuse{author#1}}
 \newcommand\getauthors{\foreach \i in {1,...,\theauthors}{\getauthor{\i}\ifnum\i=\theauthors\@\else,\ \fi}}
@@ -144,20 +140,32 @@
 \newcommand\setsubject[1]{\csdef{subject}{#1}}
 
 \newcommand\preamble{%
-    \markboth{\uppercase{\subject} --- Centro Federal De Educação Tecnológica}{}
-    \author{\IEEEauthorblockN{\getauthors}}
-    \hypersetup{
-        unicode=true,
-        pdftitle={\@title},
-        pdfsubject={Relatório de \subject{}},
-        pdfauthor={\getauthor{1}},
-        pdfstartview={FitH}
-    }%
+	\markboth{\uppercase{\subject} --- Centro Federal De Educação Tecnológica}{}
+	\author{\IEEEauthorblockN{\getauthors}}
+	\hypersetup{
+		unicode=true,
+		pdftitle={\@title},
+		pdfsubject={Relatório de \subject{}},
+		pdfauthor={\getauthor{1}},
+		pdfstartview={FitH}
+	}%
 }
 
 \let\oldmaketitle\maketitle
 \renewcommand{\maketitle}{
-    \oldmaketitle{}
-    \IEEEdisplaynontitleabstractindextext{}
-    \IEEEpeerreviewmaketitle{}
+	\if@langfr
+		\selectlanguage{french}%
+		\sisetup{locale=FR}%
+	\else
+		\if@langen
+			\selectlanguage{english}%
+			\sisetup{locale=US}%
+		\else
+			\selectlanguage{brazil}%
+			\sisetup{locale=DE}%
+		\fi
+	\fi
+	\oldmaketitle{}
+	\IEEEdisplaynontitleabstractindextext{}
+	\IEEEpeerreviewmaketitle{}
 }
