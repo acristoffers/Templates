@@ -2,7 +2,7 @@
 % !TeX encoding = UTF-8 Unicode
 
 % probably a good idea for the nomenclature entries:
-\acsetup{list-style=longtable,hyperref=true}
+\acsetup{list/template=longtable,make-links=true}
 
 \ExplSyntaxOn
 \cs_set_protected:Npn \acro_activate_hyperref_support:
@@ -24,60 +24,60 @@
 \DeclareAcronym{LPV}{
     short = LPV,
     long  = {Variação linear de parâmetros, do inglês \textit{Linear Parameter Varying}},
-    class = abbrev
+    tag = abbrev
 }
 
 \DeclareAcronym{MPC}{
     short = MPC,
     long  = {Controle preditivo por modelo, do inglês \textit{Model Predictive Control}},
-    class = abbrev
+    tag = abbrev
 }
 
 \DeclareAcronym{DMPC}{
     short = DMPC,
     long  = {Controle preditivo por modelo discreto, do inglês \textit{Discrete Model Predictive Control}},
-    class = abbrev
+    tag = abbrev
 }
 
 \DeclareAcronym{SPD}{
     short = SPD,
     long  = Sistema a Parâmetros Distribuídos,
-    class = abbrev
+    tag = abbrev
 }
 
 \DeclareAcronym{SPC}{
     short = SPC,
     long  = Sistema a Parâmetros Concentrados,
-    class = abbrev
+    tag = abbrev
 }
 
 \DeclareAcronym{DMC}{
     short = DMC,
     long  = {Controle Dinâmico por Matriz, do inglês \textit{Dynamic Matrix Control}},
-    class = abbrev
+    tag = abbrev
 }
 
 \DeclareAcronym{IMC}{
     short = IMC,
     long  = {Controle por Modelo Interno, do inglês \textit{Internal Model Control}},
-    class = abbrev
+    tag = abbrev
 }
 
 \DeclareAcronym{EDP}{
     short = EDP,
     long  = Equação Diferencial Parcial,
-    class = abbrev
+    tag = abbrev
 }
 
 \DeclareAcronym{ARMAX}{
     short = ARMAX,
     long  = {Modelo autoregressivo de média variável com entradas exógenas, do inglês \textit{Autoregressive–moving-average with exogenous inputs model}},
-    class = abbrev
+    tag = abbrev
 }
 
 \DeclareAcronym{AT}{
     short = \(A'\),
     long  = Transposta de uma matriz,
     sort  = A',
-    class = nomencl
+    tag = nomencl
 }
