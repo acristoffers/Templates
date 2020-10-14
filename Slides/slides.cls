@@ -18,30 +18,31 @@
 \newif\if@langfr
 \newif\if@useminted
 
-	\DeclareOption{abnt}{\PassOptionsToPackage{style=abnt}{biblatex}}
-	\DeclareOption{ieee}{\PassOptionsToPackage{style=ieee}{biblatex}}
-	\DeclareOption{english}{\@langentrue}
-	\DeclareOption{french}{\@langfrtrue}
+\DeclareOption{abnt}{\PassOptionsToPackage{style=abnt}{biblatex}}
+\DeclareOption{ieee}{\PassOptionsToPackage{style=ieee}{biblatex}}
+\DeclareOption{english}{\@langentrue}
+\DeclareOption{french}{\@langfrtrue}
 
-	% Processes all options and puts us back into normal mode. \RequirePackage
-	% allowed again.
-	\ProcessOptions\relax
+% Processes all options and puts us back into normal mode. \RequirePackage
+% allowed again.
+\ProcessOptions\relax
 
-	\if@langfr
-		\RequirePackage[input-complex-roots=j,
-			output-complex-root=j,
+\if@langfr
+	\RequirePackage[output-decimal-marker=,,
+		input-complex-roots=i,
+		output-complex-root=i,
+		complex-root-position=after-number]{siunitx} % SI units
+\else
+	\if@langen
+		\RequirePackage[output-decimal-marker=.,
+			input-complex-roots=i,
+			output-complex-root=i,
 			complex-root-position=after-number]{siunitx} % SI units
 	\else
-		\if@langen
-			\RequirePackage[decimalsymbol=.,
-				input-complex-roots=j,
-				output-complex-root=j,
-				complex-root-position=after-number]{siunitx} % SI units
-		\else
-			\RequirePackage[input-complex-roots=j,
-				output-complex-root=j,
-				complex-root-position=after-number]{siunitx} % SI units
-		\fi
+		\RequirePackage[output-decimal-marker=,,
+			input-complex-roots=i,
+			output-complex-root=i,
+			complex-root-position=after-number]{siunitx} % SI units
 	\fi
 \fi
 
@@ -53,9 +54,6 @@
 \RequirePackage{framed}
 \RequirePackage{etoolbox}
 \RequirePackage{pgffor}
-\RequirePackage[input-complex-roots=j,
-	output-complex-root=j,
-	complex-root-position=after-number]{siunitx}
 
 % Image manipulation
 \RequirePackage{graphicx} % For images
