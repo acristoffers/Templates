@@ -254,7 +254,7 @@
     %================================================================================================
     \vspace*{1.0cm}
     \begin{center}
-        \textsc{Centro Federal de Educaçào Tecnológica de Minas Gerais\\
+        \textsc{Centro Federal de Educação Tecnológica de Minas Gerais\\
             \textit{Campus} \local\\
             Graduação em Engenharia Mecatrônica}
     \end{center}
