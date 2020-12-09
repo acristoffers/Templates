@@ -1,0 +1,81 @@
+% !TeX root = document.tex
+% !TeX encoding = UTF-8 Unicode
+
+\section{Listas}
+\subsection{Lista Simples}
+
+Lista com números:
+
+\begin{enumerate}
+  \item One
+  \item Two
+  \item Three
+\end{enumerate}
+
+Lista sem números:
+
+\begin{itemize}
+  \item One
+  \item Two
+  \item Three
+\end{itemize}
+
+\subsection{Lista Com Numeração Diferente}
+
+Lista com números romanos:
+
+\begin{enumerate}[I]
+  \item One
+  \item Two
+        \begin{enumerate}[i]
+          \item One
+          \item Two
+          \item Three
+        \end{enumerate}
+  \item Three
+\end{enumerate}
+
+\begin{enumerate}[(I)]
+  \item One
+  \item Two
+        \begin{enumerate}[(i)]
+          \item One
+          \item Two
+          \item Three
+        \end{enumerate}
+  \item Three
+\end{enumerate}%
+
+Lista com letras:
+
+\begin{enumerate}[A]
+  \item One
+  \item Two
+        \begin{enumerate}[a]
+          \item One
+          \item Two
+          \item Three
+        \end{enumerate}
+  \item Three
+\end{enumerate}
+
+\begin{enumerate}[(A)]
+  \item One
+  \item Two
+        \begin{enumerate}[(a)]
+          \item One
+          \item Two
+          \item Three
+        \end{enumerate}
+  \item Three
+\end{enumerate}%
+
+\subsection{Lista Não Numerada}
+
+Lista de descrição:
+
+\begin{description}
+  \item[PID] Predictive-Integral-Derivative
+  \item[ABS] Absolute Bull Shit
+  \item[IoT] Internet of Things
+\end{description}

@@ -1,0 +1,52 @@
+% !TeX root = document.tex
+% !TeX encoding = UTF-8 Unicode
+
+\chapter{Equações}
+\section{Numeradas}
+
+Equation:
+\begin{equation}
+  \dot{x} = Ax+Bu
+\end{equation}
+
+Align:
+\begin{align}
+  \dot{x} & = Ax+Bu \\
+  y       & =Cx+Du
+\end{align}
+
+Equation+Aligned:
+\begin{equation}
+  \begin{aligned}
+    \dot{x} & = Ax+Bu \\
+    y       & =Cx+Du
+  \end{aligned}
+\end{equation}
+
+\section{Não Numeradas}
+
+Equation:
+\begin{equation*}
+  \dot{x} = Ax+Bu
+\end{equation*}
+
+Align:
+\begin{align*}
+  \dot{x} & = Ax+Bu \\
+  y       & =Cx+Du
+\end{align*}
+
+Equation+Aligned:
+\begin{equation*}
+  \begin{aligned}
+    \dot{x} & = Ax+Bu \\
+    y       & =Cx+Du
+  \end{aligned}
+\end{equation*}
+
+Align com epenas alguns items enumerados:
+\begin{align}
+  \dot{x} & = Ax+Bu           \\
+  y       & = Cx+Du           \\
+  c       & = Ex+Fu \nonumber % remove a numeração de uma equação
+\end{align}

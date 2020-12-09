@@ -1,0 +1,53 @@
+% !TeX root = document.tex
+% !TeX encoding = UTF-8 Unicode
+
+\section{Códigos}
+\subsection{Códigos}
+
+O pacote \texttt{minted} oferece um ambiente para apresentação de código com
+\textit{syntax highlight}.
+
+Python 3:
+
+\begin{python3code}
+#!/usr/bin/env python3
+
+
+def fib(n):
+    a = b = 1
+    while n > 1:
+        a, b, n = b, a + b, n - 1
+    return b
+
+import sys
+
+if len(sys.argv) > 1:
+    print(fib(int(sys.argv[1])))
+else:
+    print("This application finds the n'th fibonacci number.\nType the desired value for n:")
+    print(fib(int(input())))
+\end{python3code}
+
+C:
+
+\begin{ccode}
+#include <stdint.h>
+#include <stdlib.h>
+
+extern "C" {
+    uint64_t fib(uint64_t n)
+    {
+        uint64_t a = 1;
+        uint64_t b = 1;
+        uint64_t c = 1;
+
+        while (n-- > 2) {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+
+        return b;
+    }
+}
+\end{ccode}

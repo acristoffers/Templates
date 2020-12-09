@@ -1,30 +1,47 @@
 % !TeX root = document.tex
 % !TeX encoding = UTF-8 Unicode
 
-\section{Section 1}
-\subsection{Subsection 1}
+\section{Floats}
+\subsection{Figuras}
 
-\begin{slide}{Figure}
-    \vspace*{\fill}
-    \begin{figure}[ht!]
-        \centering
-        \captionsetup{justification=centering}
-        \includegraphics[height=0.3\textheight]{imgs/cefet}
-        \caption{One Image}
-    \end{figure}
-    \vspace*{\fill}
+\begin{slide}{Figura Única}
+  \begin{figure}[ht!] % ht! é o posicionamento da figura. Inútil em slides.
+    \centering % centraliza a figura no ambiente figure
+    % height=0.3\textheight faz a imagem ter 30% da altura do texto. Outra
+    % opção seria width=0.5\textwidth, por exemplo. Use a primeira pra
+    % figuras formato retrato e a segunda pra figuras formato paisagem.
+    % Ajuste o tamanho da figura usando a porcentagem.
+    \includegraphics[height=0.3\textheight]{imgs/cefet}
+    \caption{Logo do CEFET.} % texto que aparece abaixo da figura.
+  \end{figure}
 \end{slide}
 
-\subsection{Subsection 2}
+\begin{slide}{Subfiguras}
+  \begin{figure}[ht!]
+    \centering
+    \subfloat[One]{\includegraphics[height=0.3\textheight]{imgs/cefet}}\qquad
+    \subfloat[Two]{\includegraphics[height=0.3\textheight]{imgs/cefet}}
+    \caption{Duas logos do CEFET.}
+  \end{figure}
+\end{slide}
 
-\begin{slide}{Side by Side Figures}
-    \vspace*{\fill}
-    \begin{figure}[ht!]
-        \centering
-        \captionsetup{justification=centering}
-        \subfloat[One]{\includegraphics[height=0.3\textheight]{imgs/cefet}}\qquad
-        \subfloat[Two]{\includegraphics[height=0.3\textheight]{imgs/cefet}}
-        \caption{Two Images}
-    \end{figure}
-    \vspace*{\fill}
+\subsection{Tabela}
+
+\begin{slide}{Tabela}
+  % Eu uso https://www.tablesgenerator.com pra gerar a tabela, e depois edito.
+  \begin{table}
+    \begin{tabular}{l|c|c|c|c} % alinhamento das células: Left/Center/Right
+      \toprule
+      Professor & Mecânica       & Eletrônica     & Controle       & Programação    \\ \midrule
+      Lúcio     & \(\checkmark\) &                &                &                \\
+      Valter    &                &                & \(\checkmark\) &                \\
+      Thiago    &                &                &                & \(\checkmark\) \\
+      Marlon    &                & \(\checkmark\) &                &                \\
+      \bottomrule
+    \end{tabular}
+    \caption{Eixo de professores.}
+  \end{table}
+  % Este exemplo mostra como usar top/mid/bottom rules e linhas verticais. No
+  % entanto, o povo do latex não recomenda usar isso dizendo que fica feio. No
+  % fim do dia o documento é seu, use ou não se quiser.
 \end{slide}

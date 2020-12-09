@@ -1,0 +1,65 @@
+% !TeX root = document.tex
+% !TeX encoding = UTF-8 Unicode
+
+\section{Equações}
+\subsection{Numeradas}
+
+\begin{slide}{Numeradas}
+  Equation:
+  \begin{equation}
+    \dot{x} = Ax+Bu
+  \end{equation}
+
+  \vspace*{\fill} % Adiciona espaço de forma que tudo fique igualmente espaçado
+
+  Align:
+  \begin{align}
+    \dot{x} & = Ax+Bu \\
+    y       & =Cx+Du
+  \end{align}
+
+  \vspace*{\fill}
+
+  Equation+Aligned:
+  \begin{equation}
+    \begin{aligned}
+      \dot{x} & = Ax+Bu \\
+      y       & =Cx+Du
+    \end{aligned}
+  \end{equation}
+\end{slide}
+
+\subsection{Não Numeradas}
+
+\begin{slide}{Não Numeradas}
+  Equation:
+  \begin{equation*}
+    \dot{x} = Ax+Bu
+  \end{equation*}
+
+  \vspace*{\fill} % Adiciona espaço de forma que tudo fique igualmente espaçado
+
+  Align:
+  \begin{align*}
+    \dot{x} & = Ax+Bu \\
+    y       & =Cx+Du
+  \end{align*}
+
+  \vspace*{\fill}
+
+  Equation+Aligned:
+  \begin{equation*}
+    \begin{aligned}
+      \dot{x} & = Ax+Bu \\
+      y       & =Cx+Du
+    \end{aligned}
+  \end{equation*}
+\end{slide}
+
+\begin{slide}{Align Com algumas numeradas}
+  \begin{align}
+    \dot{x} & = Ax+Bu           \\
+    y       & = Cx+Du           \\
+    c       & = Ex+Fu \nonumber % remove a numeração de uma equação
+  \end{align}
+\end{slide}

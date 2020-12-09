@@ -10,6 +10,7 @@
 \newcommand{\headlinecolor}{\normalcolor}
 
 \PassOptionsToPackage{english,french,brazil}{babel}
+\PassOptionsToPackage{shortlabels}{enumitem}
 
 % Base our class on the ABNTeX2
 \LoadClass[sumario=tradicional,12pt,openright,twoside,a4paper,english,french,brazil]{abntex2}
@@ -36,20 +37,20 @@
 \renewcommand{\baselinestretch}{1.5} % Line height of 1.5
 
 \if@langfr
-    \RequirePackage[input-complex-roots=j,
-                    output-complex-root=j,
-                    complex-root-position=after-number]{siunitx} % SI units
+  \RequirePackage[input-complex-roots=j,
+    output-complex-root=j,
+    complex-root-position=after-number]{siunitx} % SI units
 \else
-    \if@langen
-        \RequirePackage[decimalsymbol=.,
-                        input-complex-roots=j,
-                        output-complex-root=j,
-                        complex-root-position=after-number]{siunitx} % SI units
-    \else
-        \RequirePackage[input-complex-roots=j,
-                        output-complex-root=j,
-                        complex-root-position=after-number]{siunitx} % SI units
-    \fi
+  \if@langen
+    \RequirePackage[decimalsymbol=.,
+      input-complex-roots=j,
+      output-complex-root=j,
+      complex-root-position=after-number]{siunitx} % SI units
+  \else
+    \RequirePackage[input-complex-roots=j,
+      output-complex-root=j,
+      complex-root-position=after-number]{siunitx} % SI units
+  \fi
 \fi
 
 \RequirePackage[useregional]{datetime2}
@@ -65,7 +66,8 @@
 \RequirePackage{rotate} % To rotate images
 \RequirePackage[section]{placeins} % Prevents figures from floating to wrong places
 \RequirePackage{epsf}
-\RequirePackage{caption}[2004/07/16]
+\RequirePackage{caption}
+\newsubfloat{figure}
 
 % Math related
 \RequirePackage{amssymb}
@@ -79,6 +81,7 @@
 \RequirePackage{multirow} % Multirow tables
 \RequirePackage{tabulary} % Table tabulation
 \RequirePackage{array}
+\RequirePackage{booktabs}
 % Makes the column type L, that is centered and allows line wrap.
 \newcolumntype{L}{>{\centering\arraybackslash}m{3cm}}
 
@@ -86,7 +89,7 @@
 \RequirePackage{pdfpages} % Advanced PDF importing
 \RequirePackage{pdflscape} % One page panorama
 \RequirePackage[european,cuteinductors,smartlabels,oldvoltagedirection]{circuitikz} % For circuits
-\RequirePackage{indentfirst} % Indents first paragraph after section
+\RequirePackage{indentfirst} % Indents first paragraph after chapter
 \RequirePackage{chngcntr} % Change numberings
 \RequirePackage{fvextra}
 \RequirePackage{csquotes} % \enquote
@@ -96,30 +99,30 @@
 \RequirePackage{fancyhdr} % Set headers and footers
 \RequirePackage[Lenny]{fncychap} % Square chapter
 \RequirePackage{acro} % abbreviations and accronyms
-\RequirePackage{tocloft}
+\RequirePackage{enumerate}
 
 \if@useminted
-    \RequirePackage[section]{minted} % Code highlighting with Pygments
-    
-    
-    % Removes red boxes when lexer can not understand something (like @ in Python 3)
-    \AtBeginEnvironment{minted}{\renewcommand{\fcolorbox}[4][]{#4}}
+  \RequirePackage[chapter,newfloat,outputdir=build]{minted} % Code highlighting with Pygments
 
-    % pythoncode environment for hightlight
-    \newminted{python3}
-    {autogobble,linenos,python3,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
-    \newmintedfile[python]{python3}
-    {autogobble,linenos,python3,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
 
-    % ccode environment for highlight
-    \newminted{c}
-    {autogobble,linenos,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
+  % Removes red boxes when lexer can not understand something (like @ in Python 3)
+  \AtBeginEnvironment{minted}{\renewcommand{\fcolorbox}[4][]{#4}}
 
-    \newfloat{code}{htp}{loc}
-    \floatname{code}{Código}
-    \newlistof{listofcodes}{loc}{Lista de Códigos}
-    \newlistentry[chapter]{code}{loc}{0}
-    \cftsetindents{code}{0em}{2.3em}
+  % pythoncode environment for hightlight
+  \newminted{python3}
+  {autogobble,linenos,python3,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
+  \newmintedfile[python]{python3}
+  {autogobble,linenos,python3,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
+
+  % ccode environment for highlight
+  \newminted{c}
+  {autogobble,linenos,fontseries=Consolas,fontsize=\scriptsize,frame=lines}
+
+  \newfloat{code}{htp}{loc}
+  \floatname{code}{Código}
+  \newlistof{listofcodes}{loc}{Lista de Códigos}
+  \newlistentry[chapter]{code}{loc}{0}
+  \cftsetindents{code}{0em}{2.3em}
 \fi
 
 % End of \RequirePackage's
@@ -128,7 +131,7 @@
 
 \renewcommand{\rm}{\textrm} % needed with memoir
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter. \ #1}{ }}
-\renewcommand{\sectionmark}[1]{\markright{\thesection. \ #1}}
+\renewcommand{\chaptermark}[1]{\markright{\thechapter. \ #1}}
 \renewcommand{\tocheadstart}{\rm}
 \renewcommand{\ABNTEXchapterfont}{\rm}
 \renewcommand{\ABNTEXchapterfontsize}{\huge}
@@ -180,231 +183,233 @@
 \newcommand\setfraseautor[1]{\csdef{fraseautor}{#1}}
 
 \newcommand\preamble{%
-    \hypersetup{
-        unicode=true,
-        pdftitle={\@title},
-        pdfsubject={TCC da Engenharia Mecatrônica do CEFET-MG},
-        pdfauthor={\getauthor{1}},
-        pdfstartview={FitH}
-    }%
+  \graphicspath{{imgs/}}
+  \hypersetup{
+    unicode=true,
+    pdftitle={\@title},
+    pdfsubject={TCC da Engenharia Mecatrônica do CEFET-MG},
+    pdfauthor={\getauthor{1}},
+    pdfstartview={FitH}
+  }%
 }
 
 \makepagestyle{cefet}
-  %%cabeçalhos
-  \makeevenhead{cefet} %%pagina par
-     {~}
-     {~}
-     {\rightmark}
-  \makeoddhead{cefet} %%pagina ímpar ou com oneside
-     {~}
-     {~}
-     {\rightmark}
-  \makeheadrule{cefet}{\textwidth}{\normalrulethickness} %linha
-  %% rodapé
-  \makeevenfoot{cefet}
-     {~} %%pagina par
-     {\thepage}
-     {~} 
-  \makeoddfoot{cefet} %%pagina ímpar ou com oneside
-     {~}
-     {\thepage}
-     {~}
+%%cabeçalhos
+\makeevenhead{cefet} %%pagina par
+{~}
+{~}
+{\rightmark}
+\makeoddhead{cefet} %%pagina ímpar ou com oneside
+{~}
+{~}
+{\rightmark}
+\makeheadrule{cefet}{\textwidth}{\normalrulethickness} %linha
+%% rodapé
+\makeevenfoot{cefet}
+{~} %%pagina par
+{\thepage}
+{~}
+\makeoddfoot{cefet} %%pagina ímpar ou com oneside
+{~}
+{\thepage}
+{~}
 \makepagestyle{cefetchapter}
-  %%cabeçalhos
-  \makeevenhead{cefetchapter} %%pagina par
-     {~}
-     {~}
-     {~}
-  \makeoddhead{cefetchapter} %%pagina ímpar ou com oneside
-     {~}
-     {~}
-     {~}
-  %% rodapé
-  \makeevenfoot{cefetchapter}
-     {~} %%pagina par
-     {\thepage}
-     {~} 
-  \makeoddfoot{cefetchapter} %%pagina ímpar ou com oneside
-     {~}
-     {\thepage}
-     {~}
+%%cabeçalhos
+\makeevenhead{cefetchapter} %%pagina par
+{~}
+{~}
+{~}
+\makeoddhead{cefetchapter} %%pagina ímpar ou com oneside
+{~}
+{~}
+{~}
+%% rodapé
+\makeevenfoot{cefetchapter}
+{~} %%pagina par
+{\thepage}
+{~}
+\makeoddfoot{cefetchapter} %%pagina ímpar ou com oneside
+{~}
+{\thepage}
+{~}
 
 \renewcommand{\maketitle}{
-    \if@langfr
-        \selectlanguage{french}%
-        \sisetup{locale=FR}%
+  \if@langfr
+    \selectlanguage{french}%
+    \sisetup{locale=FR}%
+  \else
+    \if@langen
+      \selectlanguage{english}%
+      \sisetup{locale=US}%
     \else
-        \if@langen
-            \selectlanguage{english}%
-            \sisetup{locale=US}%
-        \else
-            \selectlanguage{brazil}%
-            \sisetup{locale=DE}%
-        \fi
+      \selectlanguage{brazil}%
+      \sisetup{locale=DE}%
     \fi
-    \pretextual{}
-    \renewcommand{\printtoctitle}{\chapter*}
-    \renewcommand{\printloftitle}{\chapter*}
-    \renewcommand{\printlottitle}{\chapter*}
-    \textual{}
-    \pagestyle{cefetchapter}
-    \pagenumbering{roman}
-    %================================================================================================
-    %=========================================== CAPA 1 =============================================
-    %================================================================================================
-    \vspace*{1.0cm}
-    \begin{center}
-        \textsc{Centro Federal de Educação Tecnológica de Minas Gerais\\
-            \textit{Campus} \local\\
-            Graduação em Engenharia Mecatrônica}
-    \end{center}
-    \vspace*{3.0cm}
-    \begin{center}
-        \large{\getauthors{}}
-    \end{center}
-    \vspace*{2.5cm}
-    \begin{center}
-        \Large{\textsc{\@title}}
-    \end{center}
-    \vspace*{4cm}
-    \epsfxsize=0.175\columnwidth{}
-    \centerline{\epsffile{imgs/cefet.eps}}
-    \null\vfill
-    \begin{center}
-        \local\\\(\ano\)
-    \end{center}
-    \thispagestyle{empty}
+  \fi
+  \pretextual{}
+  \renewcommand{\printtoctitle}{\chapter*}
+  \renewcommand{\printloftitle}{\chapter*}
+  \renewcommand{\printlottitle}{\chapter*}
+  \renewcommand{\printloctitle}{\chapter*}
+  \textual{}
+  \pagestyle{cefetchapter}
+  \pagenumbering{roman}
+  %================================================================================================
+  %=========================================== CAPA 1 =============================================
+  %================================================================================================
+  \vspace*{1.0cm}
+  \begin{center}
+    \textsc{Centro Federal de Educação Tecnológica de Minas Gerais\\
+      \textit{Campus} \local\\
+      Graduação em Engenharia Mecatrônica}
+  \end{center}
+  \vspace*{3.0cm}
+  \begin{center}
+    \large{\getauthors{}}
+  \end{center}
+  \vspace*{2.5cm}
+  \begin{center}
+    \Large{\textsc{\@title}}
+  \end{center}
+  \vspace*{4cm}
+  \epsfxsize=0.175\columnwidth{}
+  \centerline{\epsffile{imgs/cefet.eps}}
+  \null\vfill
+  \begin{center}
+    \local\\\(\ano\)
+  \end{center}
+  \thispagestyle{empty}
+  \cleardoublepage{}
+  %================================================================================================
+  %=========================================== CAPA 2 =============================================
+  %================================================================================================
+  \vspace*{1cm}
+  \begin{center}
+    \large{\getauthors{}}
+  \end{center}
+  \vspace*{1.5cm}
+  \begin{center}
+    \Large{\textsc{\@title}}
+  \end{center}
+  \vspace*{1.5cm}
+  \begin{flushright}
+    \begin{minipage}{9.0cm}
+      Monografia de Trabalho de Conclusão de Curso apresentada ao
+      Colegiado de Graduação em Engenharia Mecatrônica como  parte dos
+      requisitos exigidos para a obtenção do título de Engenhario
+      Mecatrônico.\\
+      Eixo de Formação: \eixodeformacao{}.
+      \vspace*{1cm}\\
+      Orientador: \getorientador\\
+      Coorientador: \getcoorientadores{}
+    \end{minipage}
+  \end{flushright}
+  \vspace*{1cm}
+  \epsfxsize=0.175\columnwidth{}
+  \centerline{\epsffile{imgs/cefet.eps}} % Aqui poderia ser substituido por um logo do curso ou do campus
+  \null\vfill
+  \begin{center}
+    \local\\
+    \(\ano\)
+  \end{center}
+  \cleardoublepage{}
+  %================================================================================================
+  %============================== Ficha (Somente na versão final) =================================
+  %================================================================================================
+  \if@final
+    \includepdf[pages=-]{ficha.pdf} % após scanear, colocar a ficha catalográfica do texto
     \cleardoublepage{}
-    %================================================================================================
-    %=========================================== CAPA 2 =============================================
-    %================================================================================================
+  \fi
+  %================================================================================================
+  %============================== Folha de aprovação (Somente na versão final) ====================
+  %================================================================================================
+  \if@final
+    \begin{table}[]
+      \begin{tabular}{ll}
+        \multirow{3}{*}{\includegraphics[width=3cm]{imgs/cefet}} & Centro Federal de Educação Tecnológica de Minas Gerais \\
+                                                                 & CEFET-MG / Divinópolis                                 \\
+                                                                 & Curso de Engenharia Mecatrônica
+      \end{tabular}
+    \end{table}
+    \vspace*{2.0cm}
+    Monografia entitulada \enquote{\@title}, de autoria do(as) graduando(as)
+    \getauthors, aprovada pela banca examinadora constituída pelos seguintes
+    professores:
     \vspace*{1cm}
     \begin{center}
-        \large{\getauthors{}}
+      \hrulefill{}\\
+      \getorientador{}\\
+      \vspace*{1cm}
+      \foreach \i in {1,...,\themembrobanca}{%
+          \hrulefill{}\\
+          \getmembrobanca{\i}\\
+          \vspace*{1cm}
+        }
+      \vfill{}
+      \hrulefill{}\\
+      Coordenador do Curso de Engenharia Mecatrônica\\
+      \getcoordenador{}\\
+      ~\\
+      \local\\
+      \mes{}\ de\ \ano
     \end{center}
-    \vspace*{1.5cm}
-    \begin{center}
-        \Large{\textsc{\@title}}
-    \end{center}
-    \vspace*{1.5cm}
-    \begin{flushright}
-        \begin{minipage}{9.0cm}
-            Monografia de Trabalho de Conclusão de Curso apresentada ao
-            Colegiado de Graduação em Engenharia Mecatrônica como  parte dos
-            requisitos exigidos para a obtenção do título de Engenhario
-            Mecatrônico.\\
-            Eixo de Formação: \eixodeformacao{}.
-            \vspace*{1cm}\\
-            Orientador: \getorientador\\
-            Coorientador: \getcoorientadores{}
-        \end{minipage}
-    \end{flushright}
-    \vspace*{1cm}
-    \epsfxsize=0.175\columnwidth{}
-    \centerline{\epsffile{imgs/cefet.eps}} % Aqui poderia ser substituido por um logo do curso ou do campus
-    \null\vfill
-    \begin{center}
-        \local\\
-        \(\ano\)
-    \end{center}
-    \cleardoublepage{}
-    %================================================================================================
-    %============================== Ficha (Somente na versão final) =================================
-    %================================================================================================
-    \if@final
-        \includepdf[pages=-]{ficha.pdf} % após scanear, colocar a ficha catalográfica do texto
-        \cleardoublepage{}
-    \fi
-    %================================================================================================
-    %============================== Folha de aprovação (Somente na versão final) ====================
-    %================================================================================================
-    \if@final
-        \begin{table}[]
-            \begin{tabular}{ll}
-            \multirow{3}{*}{\includegraphics[width=3cm]{imgs/cefet}} & Centro Federal de Educação Tecnológica de Minas Gerais \\
-                                                                     & CEFET-MG / Divinópolis                                 \\
-                                                                     & Curso de Engenharia Mecatrônica                       
-            \end{tabular}
-        \end{table}
-        \vspace*{2.0cm}
-        Monografia entitulada \enquote{\@title}, de autoria do(as) graduando(as)
-        \getauthors, aprovada pela banca examinadora constituída pelos seguintes
-        professores:
-        \vspace*{1cm}
-        \begin{center}
-            \hrulefill{}\\
-            \getorientador{}\\
-            \vspace*{1cm}
-            \foreach \i in {1,...,\themembrobanca}{%
-                \hrulefill{}\\
-                \getmembrobanca{\i}\\
-                \vspace*{1cm}
-            }
-            \vfill{}
-            \hrulefill{}\\
-            Coordenador do Curso de Engenharia Mecatrônica\\
-            \getcoordenador{}\\
-~\\
-            \local\\
-            \mes{}\ de\ \ano
-        \end{center}
-        \vfill{}
-        \cleardoublepage{}
-    \fi
-    %======================================== Dedicatória =========================================
-    \null{}
     \vfill{}
-    \begin{flushright}
-        \begin{minipage}{6.5cm}
-            \textsc{\dedicatoria}
-        \end{minipage}\\[8mm]
-    \end{flushright}
     \cleardoublepage{}
-    %==============================================================================================
-    %======================================= Agradecimentos =======================================
-    \chapter*{Agradecimentos}
-    \noindent Agradeço,\\[2mm]
-    \agradecimentos{}
-    \thispagestyle{plain}
-    \cleardoublepage{}
-    %==============================================================================================
-    %======================================== Frase Miss Brasil ===================================
-    \null{}
-    \vfill{}
-    \begin{flushright}
-        \begin{minipage}{9.0cm}
-            \frase{}
-        \end{minipage}
-    \end{flushright}
-    \begin{flushright}
-        \fraseautor{}
-    \end{flushright}
-    \cleardoublepage{}
-    %==============================================================================================
+  \fi
+  %======================================== Dedicatória =========================================
+  \null{}
+  \vfill{}
+  \begin{flushright}
+    \begin{minipage}{6.5cm}
+      \textsc{\dedicatoria}
+    \end{minipage}\\[8mm]
+  \end{flushright}
+  \cleardoublepage{}
+  %==============================================================================================
+  %======================================= Agradecimentos =======================================
+  \chapter*{Agradecimentos}
+  \noindent Agradeço,\\[2mm]
+  \agradecimentos{}
+  \thispagestyle{plain}
+  \cleardoublepage{}
+  %==============================================================================================
+  %======================================== Frase Miss Brasil ===================================
+  \null{}
+  \vfill{}
+  \begin{flushright}
+    \begin{minipage}{9.0cm}
+      \frase{}
+    \end{minipage}
+  \end{flushright}
+  \begin{flushright}
+    \fraseautor{}
+  \end{flushright}
+  \cleardoublepage{}
+  %==============================================================================================
 }
 
 \newcommand\toc{
-    \pdfbookmark[0]{\contentsname}{toc}
-    \tableofcontents*{}
-    \thispagestyle{plain}
-    \cleardoublepage{}
-    \renewcommand{\listfigurename}{Lista de figuras}
-    \listoffigures*{}
-    \thispagestyle{plain}
-    \cleardoublepage{}
-    \listoftables*{}
-    \thispagestyle{plain}
-    \cleardoublepage{}
-    \if@useminted
-        \listofcodes*{}
-        \thispagestyle{plain}
-        \cleardoublepage{}
-    \fi
-    \include{abbrpage}
-    \pagenumbering{arabic}
-    \pagestyle{cefet}
-    \aliaspagestyle{chapter}{cefetchapter}
-    \newtheorem{theorem}{Teorema}
-    \counterwithin{figure}{chapter}
-    \counterwithin{table}{chapter}
+  \pdfbookmark[0]{\contentsname}{toc}
+  \tableofcontents*{}
+  \thispagestyle{plain}
+  \cleardoublepage{}
+  \renewcommand{\listfigurename}{Lista de figuras}
+  \listoffigures*{}
+  \thispagestyle{plain}
+  \cleardoublepage{}
+  \listoftables*{}
+  \thispagestyle{plain}
+  \cleardoublepage{}
+  % \if@useminted
+  %   \listofcodes*{}
+  %   \thispagestyle{plain}
+  %   \cleardoublepage{}
+  % \fi
+  \include{abbrpage}
+  \pagenumbering{arabic}
+  \pagestyle{cefet}
+  \aliaspagestyle{chapter}{cefetchapter}
+  \newtheorem{theorem}{Teorema}
+  \counterwithin{figure}{chapter}
+  \counterwithin{table}{chapter}
 }
