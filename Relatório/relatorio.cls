@@ -97,7 +97,9 @@
 \RequirePackage{enumerate}
 
 \if@useminted
-  \RequirePackage[section,outputdir=build]{minted} % Code highlighting with Pygments
+  % Better for latexmk, breaks Overleaf.
+  % \RequirePackage[section,outputdir=build]{minted} % Code highlighting with Pygments
+  \RequirePackage[section]{minted} % Code highlighting with Pygments
 
 
   % Removes red boxes when lexer can not understand something (like @ in Python 3)
