@@ -35,18 +35,15 @@
 \renewcommand{\baselinestretch}{1.5} % Line height of 1.5
 
 \if@langfr
-  \RequirePackage[input-complex-roots=j,
-    output-complex-root=j,
+  \RequirePackage[output-complex-root=j,
     complex-root-position=after-number]{siunitx} % SI units
 \else
   \if@langen
     \RequirePackage[decimalsymbol=.,
-      input-complex-roots=j,
       output-complex-root=j,
       complex-root-position=after-number]{siunitx} % SI units
   \else
-    \RequirePackage[input-complex-roots=j,
-      output-complex-root=j,
+    \RequirePackage[output-complex-root=j,
       complex-root-position=after-number]{siunitx} % SI units
   \fi
 \fi
